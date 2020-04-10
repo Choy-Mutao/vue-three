@@ -25,10 +25,13 @@ export default {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         this.camera.position.set(0, 25, 0);
         this.camera.lookAt(this.scene.position)
-        this.renderer = new THREE.WebGLRenderer({ antialias: true })
-        this.renderer.setSize( window.innerWidth, window.innerHeight );
-        this.renderer.setPixelRatio( window.devicePixelRatio );
-        this.$refs['three_view'].appendChild(this.renderer.domElement);
+        
+        // this.renderer = new THREE.WebGLRenderer({ antialias: true })
+        // this.renderer.setSize( window.innerWidth, window.innerHeight );
+        // this.renderer.setPixelRatio( window.devicePixelRatio );
+        // this.$refs['three_view'].appendChild(this.renderer.domElement);
+        this.initRenderer();
+
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.animate();
 
@@ -42,6 +45,26 @@ export default {
         })
     },
     methods: {
+        /**
+         * Initialize a simple default renderer and binds it to the "webgl-output" dom
+        * element.
+        * 
+        * @param additionalProperties Additional properties to pass into the renderer
+        */
+         initRenderer(additionalProperties) {
+            var props = (typeof additionalProperties !== 'undefined' && additionalProperties) ? additionalProperties : {};
+            var renderer = new THREE.WebGLRenderer(props);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMapSoft = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+            renderer.setClearColor(new THREE.Color(0x000000));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            this.$refs['three_view'].appendChild(renderer.domElement);
+
+            this.renderer =  renderer;
+        },
         animate() {
         /** If we want to animate the scene, the first thing that we need to do is find
             some way to re-render the scene at a specific interval. Before HTML5 and the

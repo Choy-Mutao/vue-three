@@ -6,7 +6,8 @@
       <router-link to="/test">Three-Test</router-link> |
       <router-link to="/demo1">DEMO-1</router-link> |
       <router-link to="/ambientLight">AmbientLight</router-link> |
-      <router-link to="/areaLight">AreaLight</router-link>
+      <router-link to="/areaLight">AreaLight</router-link> |
+      <router-link to="/postprocesssing">PostProcessing-template</router-link>
     </div>
     <router-view/>
   </div>

@@ -8,7 +8,7 @@
 
 import * as THREE from 'three';
 
-import '../../../public/libs/three/controls/TrackballControls.js';
+import '../../../public/libs/three/controls/TrackballControls';
 import '../../../public/libs/util/Stats.js';
 import '../../../public/libs/util/dat.gui';
 
@@ -19,7 +19,7 @@ export default {
     name: 'Template',
     mounted() {
         // use the defaults
-        var stats = initStats();
+        // var stats = initStats();
         var renderer =  this.$refs['template'].getRenderer();
 
         // var camera = initCamera(new THREE.Vector3(0, 20, 40));

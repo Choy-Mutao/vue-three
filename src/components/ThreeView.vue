@@ -7,7 +7,8 @@
 <script>
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Stats from 'three/examples/jsm/libs/stats.module.js';
+
+import Stats from '../../public/libs/util/Stats.js';
 
 export default {
     name: 'ThreeView',
@@ -16,7 +17,19 @@ export default {
             scene: '',
             camera: '',
             renderer: '',
-            controls: ''
+            controls: '',
+            Stats: ''
+        }
+    },
+    props: {
+        ifStats: {
+            type: Boolean,
+            default: false
+        },
+        panelType: {
+            type: Number,
+            default: 0,
+            required: this.ifStats
         }
     },
     mounted() {
@@ -26,11 +39,8 @@ export default {
         this.camera.position.set(0, 25, 0);
         this.camera.lookAt(this.scene.position)
         
-        // this.renderer = new THREE.WebGLRenderer({ antialias: true })
-        // this.renderer.setSize( window.innerWidth, window.innerHeight );
-        // this.renderer.setPixelRatio( window.devicePixelRatio );
-        // this.$refs['three_view'].appendChild(this.renderer.domElement);
         this.initRenderer();
+        this.initStats(this.panelType);
 
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.animate();
@@ -64,6 +74,27 @@ export default {
             this.$refs['three_view'].appendChild(renderer.domElement);
 
             this.renderer =  renderer;
+        },
+        /**
+         * Initialize the statistics domelement
+         * 
+         * @param {Number} type 0: fps, 1: ms, 2: mb, 3+: custom
+         * @returns stats javascript object
+         */
+        initStats(type) {
+
+            if (this.ifStats === true) {
+
+                var panelType = (typeof type !== 'undefined' && type) && (!isNaN(type)) ? parseInt(type) : 0;
+                var stats = new Stats();
+
+                stats.showPanel(panelType); // 0: fps, 1: ms, 2: mb, 3+: custom
+                // document.body.appendChild(stats.dom);
+                this.$refs['three_view'].appendChild(stats.dom);
+
+                // return stats;
+                this.Stats = stats;
+            }
         },
         animate() {
         /** If we want to animate the scene, the first thing that we need to do is find

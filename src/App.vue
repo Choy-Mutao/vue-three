@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
+      <router-link to="/about">About</router-link> |
       <router-link to="/test">Three-Test</router-link> |
       <router-link to="/demo1">DEMO-1</router-link> |
       <router-link to="/ambientLight">AmbientLight</router-link> |
@@ -10,7 +10,8 @@
       <router-link to="/postprocesssing">PostProcessing-template</router-link> |
       <router-link to="/component1">Component-1</router-link> |
       <router-link to="/component2">Foggy Scene</router-link> |
-      <router-link to="/component3">Forced Materials</router-link>
+      <router-link to="/component3">Forced Materials</router-link> |
+      <router-link to="/component4">Geometries</router-link>
     </div>
     <router-view/>
   </div>

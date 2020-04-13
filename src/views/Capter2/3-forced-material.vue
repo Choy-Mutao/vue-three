@@ -8,7 +8,7 @@
 
 import * as THREE from 'three'
 
-import dat from 'three/examples/jsm/libs/dat.gui.module'
+import { dat } from 'three/examples/jsm/libs/dat.gui.module'
 
 export default {
     name: 'ForcedMaterials',

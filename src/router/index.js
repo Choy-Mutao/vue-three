@@ -57,6 +57,11 @@ const routes = [
     path: '/component3',
     name: 'ForcedMaterials',
     component: () => import('../views/Capter2/3-forced-material.vue')
+  },
+  {
+    path: '/component4',
+    name: 'Geometries',
+    component: () => import('../views/Capter2/4-geometries.vue')
   }
 ]
 

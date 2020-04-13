@@ -7,7 +7,10 @@
       <router-link to="/demo1">DEMO-1</router-link> |
       <router-link to="/ambientLight">AmbientLight</router-link> |
       <router-link to="/areaLight">AreaLight</router-link> |
-      <router-link to="/postprocesssing">PostProcessing-template</router-link>
+      <router-link to="/postprocesssing">PostProcessing-template</router-link> |
+      <router-link to="/component1">Component-1</router-link> |
+      <router-link to="/component2">Foggy Scene</router-link> |
+      <router-link to="/component3">Forced Materials</router-link>
     </div>
     <router-view/>
   </div>

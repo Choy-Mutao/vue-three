@@ -41,7 +41,22 @@ const routes = [
   {
     path: '/postprocesssing',
     name: 'Postprocessing',
-    component: () => import('../views/Postprocessing/0-template')
+    component: () => import('../views/Postprocessing/0-template.vue')
+  },
+  {
+    path: '/component1',
+    name: 'Component-1',
+    component: () => import('../views/Capter2/1-basic-scene.vue')
+  },
+  {
+    path: '/component2',
+    name: 'FoggyScene',
+    component: () => import('../views/Capter2/2-foggy-scene.vue')
+  },
+  {
+    path: '/component3',
+    name: 'ForcedMaterials',
+    component: () => import('../views/Capter2/3-forced-material.vue')
   }
 ]
 

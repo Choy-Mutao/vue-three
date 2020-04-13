@@ -8,7 +8,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import Stats from '../../public/libs/util/Stats.js';
+import { Stats } from '../../public/libs/util/Stats.js';
 
 export default {
     name: 'ThreeView',
@@ -96,7 +96,8 @@ export default {
             }
         },
         animate() {
-        /** If we want to animate the scene, the first thing that we need to do is find
+        /** If we want to animate the scene, 
+            the first thing that we need to do is find
             some way to re-render the scene at a specific interval. Before HTML5 and the
             related JavaScript APIs came along, the way to do this was using the
             `setInterval`(function,interval) function. With setInterval , we could specify a
@@ -108,9 +109,6 @@ export default {
             usage, flickering, and generally poor performance.
          */
             requestAnimationFrame(this.animate);
-            var stats = new Stats();
-            stats.update();
-            this.$refs['three_view'].appendChild(stats.dom);
             this.render();
         },
         render() {

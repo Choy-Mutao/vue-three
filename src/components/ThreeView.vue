@@ -28,8 +28,7 @@ export default {
         },
         panelType: {
             type: Number,
-            default: 0,
-            required: this.ifStats
+            default: 0
         }
     },
     mounted() {
@@ -38,7 +37,7 @@ export default {
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         this.camera.position.set(0, 25, 0);
         this.camera.lookAt(this.scene.position)
-        
+
         this.initRenderer();
         this.initStats(this.panelType);
 
@@ -58,7 +57,7 @@ export default {
         /**
          * Initialize a simple default renderer and binds it to the "webgl-output" dom
         * element.
-        * 
+        *
         * @param additionalProperties Additional properties to pass into the renderer
         */
          initRenderer(additionalProperties) {
@@ -77,7 +76,7 @@ export default {
         },
         /**
          * Initialize the statistics domelement
-         * 
+         *
          * @param {Number} type 0: fps, 1: ms, 2: mb, 3+: custom
          * @returns stats javascript object
          */

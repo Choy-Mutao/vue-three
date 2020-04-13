@@ -1,3 +1,6 @@
+import * as THREE from 'three'
+import { addBasicMaterialSettings, addSpecificMaterialSettings, initDefaultLighting } from '../../../utils/js/util.js';
+
 function addGeometry(scene, geom, name, texture, gui, controls) {
   var mat = new THREE.MeshStandardMaterial(
     {
@@ -7,36 +10,36 @@ function addGeometry(scene, geom, name, texture, gui, controls) {
   });
   var mesh = new THREE.Mesh(geom, mat);
   mesh.castShadow = true;
-  
+
   scene.add(mesh);
   addBasicMaterialSettings(gui, controls, mat, name + '-THREE.Material');
   addSpecificMaterialSettings(gui, controls, mat, name + '-THREE.MeshStandardMaterial');
 
   return mesh;
-};
+}
 
 function addGeometryWithMaterial(scene, geom, name, gui, controls, material) {
   var mesh = new THREE.Mesh(geom, material);
   mesh.castShadow = true;
-  
+
   scene.add(mesh);
   addBasicMaterialSettings(gui, controls, material, name + '-THREE.Material');
   addSpecificMaterialSettings(gui, controls, material, name + '-Material');
 
   return mesh;
-};
+}
 
 function addEarth(scene) {
   var textureLoader = new THREE.TextureLoader();
   var planetMaterial = new THREE.MeshPhongMaterial({
-    map: textureLoader.load("../../assets/textures/earth/Earth.png"),
+    map: textureLoader.load("../../assets/textures/earth/Earth.pngRenderPass "),
     normalMap: textureLoader.load("../../assets/textures/earth/EarthNormal.png"),
     specularMap: textureLoader.load("../../assets/textures/earth/EarthSpec.png"),
     specular: new THREE.Color(0x4444aa),
     normalScale: new THREE.Vector2(6,6),
     shininess: 0.5
   });
-  
+
   var earth = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
   scene.add(earth);
   var pivot = new THREE.Object3D();
@@ -54,7 +57,7 @@ function addMars(scene) {
     normalScale: new THREE.Vector2(6,6),
     shininess: 0.5
   });
-  
+
   var mars = new THREE.Mesh(new THREE.SphereGeometry(15, 40, 40), planetMaterial);
   scene.add(mars);
   var pivot = new THREE.Object3D();
@@ -66,7 +69,7 @@ function addMars(scene) {
 
 
 function addFilmPassControls(gui, controls, effectFilm) {
-    
+
   controls.grayScale = false;
   controls.noiseIntensity = 0.8;
   controls.scanlinesIntensity = 0.325;
@@ -76,7 +79,7 @@ function addFilmPassControls(gui, controls, effectFilm) {
       if ( controls.grayScale !== undefined )	effectFilm.uniforms.grayscale.value = controls.grayScale;
       if ( controls.noiseIntensity !== undefined ) effectFilm.uniforms.nIntensity.value = controls.noiseIntensity;
       if ( controls.scanlinesIntensity !== undefined ) effectFilm.uniforms.sIntensity.value = controls.scanlinesIntensity;
-      if ( controls.scanlinesCount !== undefined ) effectFilm.uniforms.sCount.value = controls.scanlinesCount;    
+      if ( controls.scanlinesCount !== undefined ) effectFilm.uniforms.sCount.value = controls.scanlinesCount;
     }
 
   var filmFolder = gui.addFolder("FilmPass");
@@ -105,12 +108,12 @@ function addBloomPassControls(gui, controls, bloom, callback) {
 }
 
 function addDotScreenPassControls(gui, controls, dotscreen) {
-    
+
   controls.centerX = 0.5;
   controls.centerY = 0.5;
   controls.angle = 1;
   controls.scale = 1;
-  
+
   controls.updateDotScreen = function() {
     dotscreen.uniforms["center"].value.copy(new THREE.Vector2(controls.centerX, controls.centerY));
     dotscreen.uniforms["angle"].value = controls.angle;
@@ -217,7 +220,7 @@ function addColorifyShaderControls(gui, controls, shaderPass) {
   var folder = gui.addFolder("ColorifyShader");
   controls.color = 0xffffff;
 
-  folder.addColor( controls, 'color' ).onChange( function ( value ) {  
+  folder.addColor( controls, 'color' ).onChange( function ( value ) {
     shaderPass.uniforms["color"].value = new THREE.Color(value);
     }
   );
@@ -232,7 +235,7 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   function addUniformBool(folder, key, shader) {
     var localControls = {}
     localControls[key] = uniformOrDefault(shader.uniforms, key, 0);
-    folder.add(localControls, key).onChange(function(v) {shader.uniforms[key].value = v}); 
+    folder.add(localControls, key).onChange(function(v) {shader.uniforms[key].value = v});
   }
 
   function addUniformFloat(folder, key, from, to, step, shader) {
@@ -244,48 +247,48 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
   function addUniformColor(folder, key, shader) {
     var localControls = {}
     localControls[key] = uniformOrDefault(shader.uniforms, key, new THREE.Color(0xffffff));
-    folder.addColor( localControls, key ).onChange( function ( value ) {  
+    folder.addColor( localControls, key ).onChange( function ( value ) {
       shader.uniforms[key].value = new THREE.Color().setRGB(value.r / 255, value.g / 255, value.b / 255);
       }
     );
   }
 
-  function addUniformVector3(folder, key, shader, from, to, step) {
-    var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector3(0, 0, 0));
-    var keyX = key + "_x";
-    var keyY = key + "_y";
-    var keyZ = key + "_z";
+  //function addUniformVector3(folder, key, shader, from, to, step) {
+  //  var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector3(0, 0, 0));
+  //  var keyX = key + "_x";
+  //  var keyY = key + "_y";
+  //  var keyZ = key + "_z";
+  //
+  //  localControls = {};
+  //  localControls[keyX] = startValue.x;
+  //  localControls[keyY] = startValue.y;
+  //  localControls[keyZ] = startValue.z;
+  //
+  //  folder.add(localControls, keyX, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.x = v});
+  //  folder.add(localControls, keyY, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.y = v});
+  //  folder.add(localControls, keyZ, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.z = v});
+  //}
 
-    localControls = {};
-    localControls[keyX] = startValue.x;
-    localControls[keyY] = startValue.y;
-    localControls[keyZ] = startValue.z;
-
-    folder.add(localControls, keyX, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.x = v});
-    folder.add(localControls, keyY, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.y = v});
-    folder.add(localControls, keyZ, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.z = v});
-  }
-
-  function addUniformVector2(folder, key, shader, from, to, step) {
-    var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector2(0, 0));
-    shader.uniforms[key].value = startValue;
-
-    var keyX = key + "_x";
-    var keyY = key + "_y";
-
-    localControls = {};
-    localControls[keyX] = startValue.x;
-    localControls[keyY] = startValue.y;
-
-    folder.add(localControls, keyX, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.x = v});
-    folder.add(localControls, keyY, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.y = v});
-  }
+  //function addUniformVector2(folder, key, shader, from, to, step) {
+  //  var startValue = uniformOrDefault(shader.uniforms, key, new THREE.Vector2(0, 0));
+  //  shader.uniforms[key].value = startValue;
+  //
+  //  var keyX = key + "_x";
+  //  var keyY = key + "_y";
+  //
+  //  localControls = {};
+  //  localControls[keyX] = startValue.x;
+  //  localControls[keyY] = startValue.y;
+  //
+  //  folder.add(localControls, keyX, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.x = v});
+  //  folder.add(localControls, keyY, from.x, to.x, step.x).onChange(function(v) {shader.uniforms[key].value.y = v});
+  //}
 
   // create the folder and set enabled
   var folder = gui.addFolder(folderName);
   if (toSet.setEnabled !== undefined ? toSet.setEnabled : true) {
     shaderPass.enabled = enabled !== undefined ? enabled : false;
-    folder.add(shaderPass, "enabled");  
+    folder.add(shaderPass, "enabled");
   }
 
   if (toSet.floats !== undefined) {
@@ -303,17 +306,17 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
     });
   }
 
-  if (toSet.vector3 !== undefined) {
-    toSet.vector3.forEach(function (p) {
-      addUniformVector3(folder, p.key, shaderPass, p.from, p.to, p.step)
-    });
-  }
+  //if (toSet.vector3 !== undefined) {
+  //  toSet.vector3.forEach(function (p) {
+  //    addUniformVector3(folder, p.key, shaderPass, p.from, p.to, p.step)
+  //  });
+  //}
 
-  if (toSet.vector2 !== undefined) {
-    toSet.vector2.forEach(function (p) {
-      addUniformVector2(folder, p.key, shaderPass, p.from, p.to, p.step)
-    });
-  }
+  //if (toSet.vector2 !== undefined) {
+  //  toSet.vector2.forEach(function (p) {
+  //    addUniformVector2(folder, p.key, shaderPass, p.from, p.to, p.step)
+  //  });
+  //}
 
   if (toSet.booleans !== undefined) {
     toSet.booleans.forEach(function(p) {
@@ -321,4 +324,20 @@ function addShaderControl(gui, folderName, shaderPass, toSet, enabled) {
     })
   }
 }
-  
+
+export {
+  addGeometry,
+  addGeometryWithMaterial,
+  addEarth,
+  addMars,
+  addFilmPassControls,
+  addBloomPassControls,
+  addDotScreenPassControls,
+  addGlitchPassControls,
+  addHalftonePassControls,
+  addOutlinePassControls,
+  addSepiaShaderControls,
+  addShaderControl,
+  addColorifyShaderControls,
+  addUnrealBloomPassControls
+}

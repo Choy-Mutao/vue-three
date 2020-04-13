@@ -10,10 +10,9 @@ import * as THREE from 'three';
 
 import '../../../public/libs/three/controls/TrackballControls';
 import '../../../public/libs/util/Stats.js';
-import '../../../public/libs/util/dat.gui';
 
-import '../../utils/js/util.js';
-import './js/util.js';
+import { initTrackballControls } from '../../utils/js/util.js';
+import { addEarth } from './js/util.js';
 
 export default {
     name: 'Template',
@@ -24,7 +23,7 @@ export default {
 
         // var camera = initCamera(new THREE.Vector3(0, 20, 40));
         var camera = this.$refs['template'].getCamera();
-        
+
         var trackballControls = initTrackballControls(camera, renderer);
         var clock = new THREE.Clock();
 
@@ -44,9 +43,9 @@ export default {
         composer.addPass(effectFilm);
 
         // setup controls
-        var gui = new dat.GUI();
-        var controls = {};
-        addFilmPassControls(gui, controls, effectFilm);
+        //var gui = new dat.GUI();
+        //var controls = {};
+        //addFilmPassControls(gui, controls, effectFilm);
     }
 }
 </script>

@@ -37,6 +37,11 @@ const routes = [
     path: '/areaLight',
     name: 'AreaLight',
     component: () => import('../views/Light/AirLight.vue')
+  },
+  {
+    path: '/postprocesssing',
+    name: 'Postprocessing',
+    component: () => import('../views/Postprocessing/0-template')
   }
 ]
 

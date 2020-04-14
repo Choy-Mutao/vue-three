@@ -62,6 +62,36 @@ const routes = [
     path: '/component4',
     name: 'Geometries',
     component: () => import('../views/Capter2/4-geometries.vue')
+  },
+  {
+    path: '/component5',
+    name: 'CustomGeometry',
+    component: () => import('../views/Capter2/5-custom-geometry')
+  },
+  {
+    path: '/component6',
+    name: 'MeshProperties',
+    component: () => import('../views/Capter2/6-mesh-properties')
+  },
+  {
+    path: '/component7',
+    name: 'BothCameras',
+    component: () => import('../views/Capter2/7-both-cameras')
+  },
+  {
+    path: '/component8',
+    name: 'CamerasLookAt',
+    component: () => import('../views/Capter2/8-cameras-lookat')
+  },
+  {
+    path: '/component31',
+    name: 'AmbientLight',
+    component: () => import('../views/Capter3/1-ambient-light')
+  },
+  {
+    path: '/component32',
+    name: 'SpotLight',
+    component: () => import('../views/Capter3/2-spot-light')
   }
 ]
 

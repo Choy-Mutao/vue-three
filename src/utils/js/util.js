@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
 
 /**
  * Initialize the statistics domelement
@@ -118,7 +119,7 @@ function initDefaultDirectionalLighting (scene, initialPosition) {
  * @param {THREE.Renderer} renderer
  */
 function initTrackballControls (camera, renderer) {
-  var trackballControls = new THREE.TrackballControls(camera, renderer.domElement)
+  var trackballControls = new TrackballControls(camera, renderer.domElement)
   trackballControls.rotateSpeed = 1.0
   trackballControls.zoomSpeed = 1.2
   trackballControls.panSpeed = 0.8

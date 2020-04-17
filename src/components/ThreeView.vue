@@ -9,6 +9,7 @@
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
   import Stats from 'three/examples/jsm/libs/stats.module.js'
+  import dat from 'three/examples/jsm/libs/dat.gui.module.js'
 
   export default {
     name: 'ThreeView',
@@ -57,6 +58,15 @@
 
     },
     methods: {
+
+      setUpControls(func) {
+        var gui = new dat.GUI();
+        for(var key in func.keys()) {
+          gui.add(func, key);
+        }
+        // todo unfinished
+        return gui
+      },
 
       /**
        * Initialize a simple camera and point it at the center of a scene

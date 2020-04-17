@@ -89,9 +89,11 @@
         };
       };
 
-      var gui = new dat.GUI();
-      gui.add(controls, 'switchCamera');
-      gui.add(controls, 'perspective').listen();
+      // var gui = new dat.GUI();
+      // gui.add(controls, 'switchCamera');
+      // gui.add(controls, 'perspective').listen();
+      this.$refs['camera-lookat'].setUpControls(controls);
+
     }
   }
 </script>

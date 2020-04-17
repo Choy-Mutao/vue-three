@@ -17,7 +17,12 @@
       <router-link to="/component7">Both Cameras</router-link> |
       <router-link to="/component8">Cameras LookAt</router-link> |
       <router-link to="/component31">Ambient Light</router-link> |
-      <router-link to="/component32">Spot Light</router-link>
+      <router-link to="/component32">Spot Light</router-link> |
+      <router-link to="/component33">Point Light</router-link> |
+      <router-link to="/component34">Direction Light</router-link> |
+      <router-link to="/component35">Hemisphere Light</router-link> |
+      <router-link to="/component36">Area Light</router-link> |
+      <router-link to="/component37">Lens Flares</router-link>
     </div>
     <router-view/>
   </div>

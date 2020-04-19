@@ -28,16 +28,16 @@ const routes = [
     name: 'DEMO-1',
     component: () => import('../views/Scene/CreateFirstScene')
   },
-  {
-    path: '/ambientLight',
-    name: 'AmbientLight',
-    component: () => import('../views/Light/AmbientLight')
-  },
-  {
-    path: '/areaLight',
-    name: 'AreaLight',
-    component: () => import('../views/Light/AirLight')
-  },
+  // {
+  //   path: '/ambientLight',
+  //   name: 'AmbientLight',
+  //   component: () => import('../views/Light/AmbientLight')
+  // },
+  // {
+  //   path: '/areaLight',
+  //   name: 'AreaLight',
+  //   component: () => import('../views/Light/AirLight')
+  // },
   {
     path: '/postprocesssing',
     name: 'Postprocessing',
@@ -105,7 +105,7 @@ const routes = [
   },
   {
     path: '/component35',
-    name: 'DirectionLight',
+    name: 'HemisphereLight',
     component: () => import('../views/Capter3/5-hemisphere-light')
   },
   {
@@ -117,6 +117,11 @@ const routes = [
     path: '/component37',
     name: 'LensFlares',
     component: () => import('../views/Capter3/7-lensflares')
+  },
+  {
+    path: '/lensflares',
+    name: 'Threejs-Lensflares',
+    component: () => import('../views/ThreejsExample/Lensflares.vue')
   }
 ]
 

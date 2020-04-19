@@ -10,6 +10,8 @@ import * as THREE from 'three'
 
 import dat from 'three/examples/jsm/libs/dat.gui.module.js'
 
+import { Lensflare, LensflareElement } from 'three/examples/jsm/objects/Lensflare.js'
+
 export default {
     name: 'LensFlares',
     mounted() {
@@ -154,13 +156,13 @@ export default {
 
         var flareColor = new THREE.Color(0xffaacc);
 
-        var lensFlare = new THREE.Lensflare();
+        var lensFlare = new Lensflare();
 
-        lensFlare.addElement(new THREE.LensflareElement(textureFlare0, 350, 0.0, flareColor));
-        lensFlare.addElement(new THREE.LensflareElement(textureFlare3, 60, 0.6, flareColor));
-        lensFlare.addElement(new THREE.LensflareElement(textureFlare3, 70, 0.7, flareColor));
-        lensFlare.addElement(new THREE.LensflareElement(textureFlare3, 120, 0.9, flareColor));
-        lensFlare.addElement(new THREE.LensflareElement(textureFlare3, 70, 1.0, flareColor));
+        lensFlare.addElement(new LensflareElement(textureFlare0, 350, 0.0, flareColor));
+        lensFlare.addElement(new LensflareElement(textureFlare3, 60, 0.6, flareColor));
+        lensFlare.addElement(new LensflareElement(textureFlare3, 70, 0.7, flareColor));
+        lensFlare.addElement(new LensflareElement(textureFlare3, 120, 0.9, flareColor));
+        lensFlare.addElement(new LensflareElement(textureFlare3, 70, 1.0, flareColor));
         spotLight.add(lensFlare);
     }
 }
